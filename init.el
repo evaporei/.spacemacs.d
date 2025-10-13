@@ -35,7 +35,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(python
+   '(csv
+     python
      rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -596,10 +597,10 @@ This function is called at the very end of Spacemacs initialization."
                 auto-highlight-symbol auto-yasnippet avy-jump-helm-line blacken
                 bui centered-cursor-mode clean-aindent-mode closql code-cells
                 column-enforce-mode company company-anaconda concurrent cond-let
-                ctable cython-mode dap-mode deferred define-word devdocs diminish
-                dired-quick-sort disable-mouse dotenv-mode drag-stuff dumb-jump
-                edit-indirect elisp-def elisp-demos elisp-slime-nav emacsql emr
-                epc eval-sexp-fu evil-anzu evil-args evil-cleverparens
+                csv-mode ctable cython-mode dap-mode deferred define-word devdocs
+                diminish dired-quick-sort disable-mouse dotenv-mode drag-stuff
+                dumb-jump edit-indirect elisp-def elisp-demos elisp-slime-nav
+                emacsql emr epc eval-sexp-fu evil-anzu evil-args evil-cleverparens
                 evil-collection evil-easymotion evil-escape evil-evilified-state
                 evil-exchange evil-goggles evil-iedit-state evil-indent-plus
                 evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
