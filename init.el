@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-                                      diff-hl
+                                      ;; diff-hl
                                       (odin-mode :location (recipe
                                                             :fetcher github
                                                             :repo "mattt-b/odin-mode")))
