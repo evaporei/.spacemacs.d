@@ -35,7 +35,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(csv
+   '(sql
+     csv
      python
      rust
      ;; ----------------------------------------------------------------
@@ -49,6 +50,7 @@ This function should only modify configuration layer settings."
      git
      helm
      lsp
+     eglot ;; for Odin
      markdown
      multiple-cursors
      org
@@ -73,7 +75,10 @@ This function should only modify configuration layer settings."
                                       ;; diff-hl
                                       (odin-mode :location (recipe
                                                             :fetcher github
-                                                            :repo "mattt-b/odin-mode")))
+                                                            :repo "mattt-b/odin-mode"))
+                                      (jj-mode :location (recipe
+                                                          :fetcher github
+                                                          :repo "evaporei/jj-mode.el")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -427,11 +432,11 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
 
    ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
    ;; `smartparens-strict-mode' will be enabled in programming modes.
@@ -578,6 +583,10 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; ensure odin-mode is used for .odin files
   (add-to-list 'auto-mode-alist '("\\.odin\\'" . odin-mode))
+  (setq lsp-disabled-clients '(sql-mode odin-mode))
+  (use-package eglot
+    :defer t
+    :hook (odin-mode . eglot-ensure))
   )
 
 
@@ -588,55 +597,57 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ignored-local-variable-values '((rustic-indent-offset . 4)))
- '(package-selected-packages
-   '(ace-link aggressive-indent all-the-icons anaconda-mode auto-compile
-              auto-highlight-symbol auto-yasnippet avy-jump-helm-line blacken
-              bui centered-cursor-mode clean-aindent-mode closql code-cells
-              column-enforce-mode company company-anaconda concurrent cond-let
-              csv-mode ctable cython-mode dap-mode deferred define-word devdocs
-              diminish dired-quick-sort disable-mouse dotenv-mode drag-stuff
-              dumb-jump edit-indirect elisp-def elisp-demos elisp-slime-nav
-              emacsql emr epc eval-sexp-fu evil-anzu evil-args evil-cleverparens
-              evil-collection evil-easymotion evil-escape evil-evilified-state
-              evil-exchange evil-goggles evil-iedit-state evil-indent-plus
-              evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
-              evil-numbers evil-surround evil-textobj-line evil-tutor
-              evil-unimpaired evil-visual-mark-mode evil-visualstar
-              expand-region eyebrowse fancy-battery flycheck flycheck-elsa
-              flycheck-package flycheck-pos-tip forge ggtags gh-md ghub git-link
-              git-messenger git-modes git-timemachine gitignore-templates
-              golden-ratio google-translate helm-ag helm-c-yasnippet helm-comint
-              helm-company helm-cscope helm-descbinds helm-ls-git helm-lsp
-              helm-make helm-mode-manager helm-org helm-projectile helm-purpose
-              helm-pydoc helm-swoop helm-xref hide-comnt highlight-indentation
-              highlight-numbers highlight-parentheses hl-todo holy-mode
-              hungry-delete hybrid-mode importmagic indent-guide info+ inspector
-              link-hint live-py-mode llama load-env-vars lorem-ipsum lsp-docker
-              lsp-mode lsp-origami lsp-pyright lsp-treemacs lsp-ui macrostep
-              magit magit-section markdown-mode markdown-toc multi-line nameless
-              nose odin-mode open-junk-file org-superstar origami overseer
-              package-lint page-break-lines paradox password-generator pcre2el
-              pet pip-requirements pipenv pippel poetry popwin pos-tip py-isort
-              pydoc pyenv-mode pylookup python-pytest pythonic pyvenv quickrun
-              rainbow-delimiters reformatter restart-emacs ron-mode ruff-format
-              rust-mode rustic smeargle space-doc spaceline
-              spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
-              string-edit-at-point string-inflection symbol-overlay symon
-              term-cursor toc-org transient treemacs-evil treemacs-icons-dired
-              treemacs-magit treemacs-persp treemacs-projectile treepy undo-fu
-              undo-fu-session uuidgen uv vi-tilde-fringe volatile-highlights
-              vundo wgrep winum with-editor writeroom-mode ws-butler xcscope
-              xterm-color yaml yapfify yasnippet yasnippet-snippets)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ignored-local-variable-values '((rustic-indent-offset . 4)))
+   '(package-selected-packages
+     '(ace-link aggressive-indent all-the-icons anaconda-mode auto-compile
+                auto-highlight-symbol auto-yasnippet avy-jump-helm-line blacken
+                bui centered-cursor-mode clean-aindent-mode closql code-cells
+                column-enforce-mode company company-anaconda concurrent cond-let
+                csv-mode ctable cython-mode dap-mode deferred define-word devdocs
+                diminish dired-quick-sort disable-mouse dotenv-mode drag-stuff
+                dumb-jump edit-indirect elisp-def elisp-demos elisp-slime-nav
+                emacsql emr epc eval-sexp-fu evil-anzu evil-args evil-cleverparens
+                evil-collection evil-easymotion evil-escape evil-evilified-state
+                evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
+                evil-numbers evil-surround evil-textobj-line evil-tutor
+                evil-unimpaired evil-vimish-fold evil-visual-mark-mode
+                evil-visualstar expand-region eyebrowse fancy-battery flycheck
+                flycheck-elsa flycheck-package flycheck-pos-tip forge ggtags gh-md
+                ghub git-link git-messenger git-modes git-timemachine
+                gitignore-templates golden-ratio google-translate helm-ag
+                helm-c-yasnippet helm-comint helm-company helm-cscope
+                helm-descbinds helm-ls-git helm-lsp helm-make helm-mode-manager
+                helm-org helm-projectile helm-purpose helm-pydoc helm-swoop
+                helm-xref hide-comnt highlight-indentation highlight-numbers
+                highlight-parentheses hl-todo holy-mode hungry-delete hybrid-mode
+                importmagic indent-guide info+ inspector link-hint live-py-mode
+                llama load-env-vars lorem-ipsum lsp-docker lsp-mode lsp-origami
+                lsp-pyright lsp-treemacs lsp-ui macrostep magit magit-section
+                markdown-mode markdown-toc multi-line nameless nose odin-mode
+                open-junk-file org-superstar origami overseer package-lint
+                page-break-lines paradox password-generator pcre2el pet
+                pip-requirements pipenv pippel poetry popwin pos-tip py-isort
+                pydoc pyenv-mode pylookup python-pytest pythonic pyvenv quickrun
+                rainbow-delimiters reformatter restart-emacs ron-mode ruff-format
+                rust-mode rustic smeargle space-doc spaceline
+                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
+                sql-indent sqlup-mode string-edit-at-point string-inflection
+                symbol-overlay symon term-cursor toc-org transient treemacs-evil
+                treemacs-icons-dired treemacs-magit treemacs-persp
+                treemacs-projectile treepy undo-fu undo-fu-session uuidgen uv
+                vi-tilde-fringe vimish-fold volatile-highlights vundo wgrep winum
+                with-editor writeroom-mode ws-butler xcscope xterm-color yaml
+                yapfify yasnippet yasnippet-snippets)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
