@@ -53,7 +53,15 @@ This function should only modify configuration layer settings."
      eglot ;; for Odin
      markdown
      multiple-cursors
-     org
+     (org :variables
+          org-enable-org-journal-support t
+          org-journal-dir "~/org/"
+          org-journal-file-format "%Y-%m-%d"
+          org-journal-date-prefix "#+TITLE: "
+          org-journal-date-format "%A, %B %d %Y"
+          org-journal-time-prefix "* "
+          org-journal-time-format "" )
+
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -72,6 +80,11 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      ;; perspective
+
+                                      (visual-fill-column :location (recipe
+                                                                     :fetcher codeberg
+                                                                     :repo "joostkremers/visual-fill-column"))
                                       ;; diff-hl
                                       (odin-mode :location (recipe
                                                             :fetcher github
@@ -432,7 +445,12 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers '(:relative t
+                                         :visual nil
+                                         ;; :disabled-for-modes org-mode
+                                         ;; org-journal
+                                         )
+
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -587,6 +605,17 @@ before packages are loaded."
   (use-package eglot
     :defer t
     :hook (odin-mode . eglot-ensure))
+  (with-eval-after-load 'org-journal
+    (setq
+     org-journal-dir "~/org/"
+     org-journal-file-format "%Y-%m-%d.org"
+     org-journal-date-prefix "#+TITLE: "
+     org-journal-date-format "%A, %B %d %Y"
+     org-journal-time-prefix "* "
+     org-journal-time-format "" ))
+  (with-eval-after-load 'visual-fill-column
+    ;; (setq visual-fill-column-center-text t)
+    (add-hook 'visual-line-mode-hook #'visual-fill-column-for-vline))
   )
 
 
@@ -630,12 +659,12 @@ This function is called at the very end of Spacemacs initialization."
                 llama load-env-vars lorem-ipsum lsp-docker lsp-mode lsp-origami
                 lsp-pyright lsp-treemacs lsp-ui macrostep magit magit-section
                 markdown-mode markdown-toc multi-line nameless nose odin-mode
-                open-junk-file org-superstar origami overseer package-lint
-                page-break-lines paradox password-generator pcre2el pet
-                pip-requirements pipenv pippel poetry popwin pos-tip py-isort
-                pydoc pyenv-mode pylookup python-pytest pythonic pyvenv quickrun
-                rainbow-delimiters reformatter restart-emacs ron-mode ruff-format
-                rust-mode rustic smeargle space-doc spaceline
+                open-junk-file org-journal org-superstar origami overseer
+                package-lint page-break-lines paradox password-generator pcre2el
+                perspective pet pip-requirements pipenv pippel poetry popwin
+                pos-tip py-isort pydoc pyenv-mode pylookup python-pytest pythonic
+                pyvenv quickrun rainbow-delimiters reformatter restart-emacs
+                ron-mode ruff-format rust-mode rustic smeargle space-doc spaceline
                 spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
                 sql-indent sqlup-mode string-edit-at-point string-inflection
                 symbol-overlay symon term-cursor toc-org transient treemacs-evil
