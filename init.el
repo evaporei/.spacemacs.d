@@ -91,7 +91,7 @@ This function should only modify configuration layer settings."
                                                             :repo "mattt-b/odin-mode"))
                                       (jj-mode :location (recipe
                                                           :fetcher github
-                                                          :repo "evaporei/jj-mode.el")))
+                                                          :repo "bolivier/jj-mode.el")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
