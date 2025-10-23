@@ -116,7 +116,9 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   quelpa-build-tar-executable "/opt/homebrew/bin/gtar"
+   quelpa-build-tar-executable (case system-type
+                                 ((windows-nt) "C:/Users/evaporei/opt/msys64/usr/bin/tar.exe")
+                                 ((darwin)  "/opt/homebrew/bin/gtar"))
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
@@ -258,8 +260,11 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 10.0
+   ;; eww
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;; good
+   dotspacemacs-default-font '("Menlo"
+                               :size 11.0
                                :weight normal
                                :width normal)
 
@@ -658,21 +663,22 @@ This function is called at the very end of Spacemacs initialization."
                 importmagic indent-guide info+ inspector link-hint live-py-mode
                 llama load-env-vars lorem-ipsum lsp-docker lsp-mode lsp-origami
                 lsp-pyright lsp-treemacs lsp-ui macrostep magit magit-section
-                markdown-mode markdown-toc multi-line nameless nose odin-mode
-                open-junk-file org-journal org-superstar origami overseer
-                package-lint page-break-lines paradox password-generator pcre2el
-                perspective pet pip-requirements pipenv pippel poetry popwin
-                pos-tip py-isort pydoc pyenv-mode pylookup python-pytest pythonic
-                pyvenv quickrun rainbow-delimiters reformatter restart-emacs
-                ron-mode ruff-format rust-mode rustic smeargle space-doc spaceline
-                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
-                sql-indent sqlup-mode string-edit-at-point string-inflection
-                symbol-overlay symon term-cursor toc-org transient treemacs-evil
-                treemacs-icons-dired treemacs-magit treemacs-persp
-                treemacs-projectile treepy undo-fu undo-fu-session uuidgen uv
-                vi-tilde-fringe vimish-fold volatile-highlights vundo wgrep winum
-                with-editor writeroom-mode ws-butler xcscope xterm-color yaml
-                yapfify yasnippet yasnippet-snippets)))
+                markdown-mode markdown-toc monokai-theme multi-line nameless nose
+                odin-mode open-junk-file org-journal org-superstar origami
+                overseer package-lint page-break-lines paradox password-generator
+                pcre2el perspective pet pip-requirements pipenv pippel poetry
+                popwin pos-tip py-isort pydoc pyenv-mode pylookup python-pytest
+                pythonic pyvenv quickrun rainbow-delimiters reformatter
+                restart-emacs ron-mode ruff-format rust-mode rustic smeargle
+                space-doc spaceline spacemacs-purpose-popwin
+                spacemacs-whitespace-cleanup sphinx-doc sql-indent sqlup-mode
+                string-edit-at-point string-inflection symbol-overlay symon
+                term-cursor toc-org transient treemacs-evil treemacs-icons-dired
+                treemacs-magit treemacs-persp treemacs-projectile treepy undo-fu
+                undo-fu-session uuidgen uv vi-tilde-fringe vimish-fold
+                volatile-highlights vundo wgrep winum with-editor writeroom-mode
+                ws-butler xcscope xterm-color yaml yapfify yasnippet
+                yasnippet-snippets)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
