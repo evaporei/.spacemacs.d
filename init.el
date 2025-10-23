@@ -116,10 +116,13 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   quelpa-build-tar-executable (case system-type
-                                 ((windows-nt) "C:/Users/evaporei/opt/msys64/usr/bin/tar.exe")
-                                 ((darwin)  "/opt/homebrew/bin/gtar"))
-   ;; Maximum allowed time in seconds to contact an ELPA repository.
+   ;; https://github.com/syl20bnr/spacemacs/issues/8901
+   quelpa-build-tar-executable
+   "/opt/homebrew/bin/gtar"
+   ;; (case system-type
+   ;;                                   ('windows-nt "C:/Users/evaporei/opt/msys64/usr/bin/tar.exe")
+   ;;                                   ('darwin  "/opt/homebrew/bin/gtar"))
+   ;; ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
 
