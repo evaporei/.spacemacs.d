@@ -35,7 +35,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(javascript
+   '(yaml
+     typescript
+     javascript
      sql
      csv
      python
@@ -611,6 +613,8 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; ensure odin-mode is used for .odin files
   (add-to-list 'auto-mode-alist '("\\.odin\\'" . odin-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (setq lsp-disabled-clients '(sql-mode odin-mode))
   (use-package eglot
     :defer t
@@ -644,7 +648,7 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(ignored-local-variable-values '((rustic-indent-offset . 4)))
+   '(ignored-local-variable-values '((js2-basic-offset . 2) (rustic-indent-offset . 4)))
    '(package-selected-packages
      '(ace-link add-node-modules-path aggressive-indent all-the-icons anaconda-mode
                 auto-compile auto-highlight-symbol auto-yasnippet
@@ -653,15 +657,16 @@ This function is called at the very end of Spacemacs initialization."
                 company-anaconda concurrent cond-let csv-mode ctable cython-mode
                 dap-mode deferred define-word devdocs diminish dired-quick-sort
                 disable-mouse dotenv-mode drag-stuff dumb-jump eat edit-indirect
-                elisp-def elisp-demos elisp-slime-nav emacsql emr epc esh-help
-                eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu evil-args
-                evil-cleverparens evil-collection evil-easymotion evil-escape
-                evil-evilified-state evil-exchange evil-goggles evil-iedit-state
-                evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc
-                evil-nerd-commenter evil-numbers evil-surround evil-textobj-line
-                evil-tutor evil-unimpaired evil-vimish-fold evil-visual-mark-mode
-                evil-visualstar expand-region eyebrowse fancy-battery flycheck
-                flycheck-elsa flycheck-package flycheck-pos-tip flyspell-correct
+                elisp-def elisp-demos elisp-slime-nav emacsql emmet-mode emr epc
+                esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu
+                evil-args evil-cleverparens evil-collection evil-easymotion
+                evil-escape evil-evilified-state evil-exchange evil-goggles
+                evil-iedit-state evil-indent-plus evil-lion evil-lisp-state
+                evil-matchit evil-mc evil-nerd-commenter evil-numbers
+                evil-surround evil-textobj-line evil-tutor evil-unimpaired
+                evil-vimish-fold evil-visual-mark-mode evil-visualstar
+                expand-region eyebrowse fancy-battery flycheck flycheck-elsa
+                flycheck-package flycheck-pos-tip flyspell-correct
                 flyspell-correct-helm forge ggtags gh-md ghub git-link
                 git-messenger git-modes git-timemachine gitignore-templates
                 golden-ratio google-translate grizzl helm-ag helm-c-yasnippet
@@ -687,11 +692,11 @@ This function is called at the very end of Spacemacs initialization."
                 sql-indent sqlup-mode string-edit-at-point string-inflection
                 symbol-overlay symon term-cursor terminal-here tern toc-org
                 transient treemacs-evil treemacs-icons-dired treemacs-magit
-                treemacs-persp treemacs-projectile treepy undo-fu undo-fu-session
-                uuidgen uv vi-tilde-fringe vimish-fold volatile-highlights vterm
-                vundo web-beautify wgrep winum with-editor writeroom-mode
-                ws-butler xcscope xterm-color yaml yapfify yasnippet
-                yasnippet-snippets)))
+                treemacs-persp treemacs-projectile treepy typescript-mode undo-fu
+                undo-fu-session uuidgen uv vi-tilde-fringe vimish-fold
+                volatile-highlights vterm vundo web-beautify web-mode wgrep winum
+                with-editor writeroom-mode ws-butler xcscope xterm-color yaml
+                yaml-mode yapfify yasnippet yasnippet-snippets)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
