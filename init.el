@@ -35,7 +35,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(ocaml
+   '(c-c++
+     ocaml
      yaml
      typescript
      javascript
@@ -658,22 +659,23 @@ This function is called at the very end of Spacemacs initialization."
                 auto-compile auto-highlight-symbol auto-yasnippet
                 avy-jump-helm-line blacken bui caml centered-cursor-mode
                 clean-aindent-mode closql code-cells column-enforce-mode company
-                company-anaconda concurrent cond-let csv-mode ctable cython-mode
-                dap-mode deferred define-word devdocs diminish dired-quick-sort
-                disable-mouse dotenv-mode drag-stuff dumb-jump dune eat
-                edit-indirect elisp-def elisp-demos elisp-slime-nav emacsql
-                emmet-mode emr epc esh-help eshell-prompt-extras eshell-z
-                eval-sexp-fu evil-anzu evil-args evil-cleverparens evil-collection
-                evil-easymotion evil-escape evil-evilified-state evil-exchange
-                evil-goggles evil-iedit-state evil-indent-plus evil-lion
-                evil-lisp-state evil-matchit evil-mc evil-nerd-commenter
-                evil-numbers evil-surround evil-textobj-line evil-tutor
-                evil-unimpaired evil-vimish-fold evil-visual-mark-mode
-                evil-visualstar expand-region eyebrowse fancy-battery flycheck
-                flycheck-elsa flycheck-ocaml flycheck-package flycheck-pos-tip
-                flyspell-correct flyspell-correct-helm forge ggtags gh-md ghub
-                git-link git-messenger git-modes git-timemachine
-                gitignore-templates golden-ratio google-translate grizzl helm-ag
+                company-anaconda company-c-headers concurrent cond-let
+                cpp-auto-include csv-mode ctable cython-mode dap-mode deferred
+                define-word devdocs diminish dired-quick-sort disable-mouse
+                disaster dotenv-mode drag-stuff dumb-jump dune eat edit-indirect
+                elisp-def elisp-demos elisp-slime-nav emacsql emmet-mode emr epc
+                esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu
+                evil-args evil-cleverparens evil-collection evil-easymotion
+                evil-escape evil-evilified-state evil-exchange evil-goggles
+                evil-iedit-state evil-indent-plus evil-lion evil-lisp-state
+                evil-matchit evil-mc evil-nerd-commenter evil-numbers
+                evil-surround evil-textobj-line evil-tutor evil-unimpaired
+                evil-vimish-fold evil-visual-mark-mode evil-visualstar
+                expand-region eyebrowse fancy-battery flycheck flycheck-elsa
+                flycheck-ocaml flycheck-package flycheck-pos-tip flyspell-correct
+                flyspell-correct-helm forge gendoxy ggtags gh-md ghub git-link
+                git-messenger git-modes git-timemachine gitignore-templates
+                golden-ratio google-c-style google-translate grizzl helm-ag
                 helm-c-yasnippet helm-comint helm-company helm-cscope
                 helm-descbinds helm-ls-git helm-lsp helm-make helm-mode-manager
                 helm-org helm-projectile helm-purpose helm-pydoc helm-swoop
