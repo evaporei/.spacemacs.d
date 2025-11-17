@@ -618,8 +618,8 @@ before packages are loaded."
   ;; ensure odin-mode is used for .odin files
   (add-to-list 'auto-mode-alist '("\\.jai\\'" . jai-mode))
   (add-to-list 'auto-mode-alist '("\\.odin\\'" . odin-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (setq lsp-disabled-clients '(sql-mode odin-mode))
   (use-package eglot
     :defer t
