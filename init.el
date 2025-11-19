@@ -35,7 +35,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(c-c++
+   '((c-c++ :variables c-c++-enable-clang-format-on-save nil)
      ocaml
      yaml
      typescript
